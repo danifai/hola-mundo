@@ -1,0 +1,34 @@
+/* Espacio que ocupa el hero dentro del flujo; la imagen va fija detrás */
+.hero-parallax {
+  position: relative;
+  height: 88vh;
+  min-height: 420px;
+}
+
+/* Empieza debajo del header (altura medida en Header.jsx) para no quedar tapada */
+.hero-parallax__bg {
+  position: fixed;
+  top: var(--hm-header-full, 130px);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background-image: url('/img/fondo_bebe.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Mobile / vertical: usa la versión vertical de la imagen */
+@media (max-width: 767.98px), (orientation: portrait) {
+  .hero-parallax__bg {
+    background-image: url('/img/fondo_bebe_vertical.jpg');
+    background-position: center top;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-parallax {
+    height: 80vh;
+  }
+}

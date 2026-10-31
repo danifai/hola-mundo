@@ -1,0 +1,200 @@
+export const productos = [
+  {
+    id: 1,
+    nombre: "Silla de Comer Malmo",
+    categoria: "Sillas",
+    precio: 200000,
+    imagen: "/img/silla-malmo.webp",
+    descripcion: "Silla de comer para acompañar las comidas diarias del bebé desde los 6 meses y hasta los 18 kg, con un diseño práctico, regulable y cómodo",
+    stock: 12,
+    destacado: true,
+    oferta: false
+  },
+  {
+    id: 2,
+    nombre: "Silla de Comer Booster Portátil",
+    categoria: "Sillas",
+    precio: 65000,
+    imagen: "/img/silla-booster.webp",
+    descripcion: "Asiento elevador ultra compacto, ideal para viajes o espacios reducidos. Ajustable a cualquier silla tradicional.",
+    stock: 8,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 3,
+    nombre: "Cochecito Travel System 3 en 1",
+    categoria: "Carritos",
+    precio: 320000,
+    imagen: "/img/coche-travel.webp",
+    descripcion: "Sistema de paseo completo que incluye cochecito de estructura de aluminio, moisés convertible y huevito homologado.",
+    stock: 5,
+    destacado: true,
+    oferta: false
+  },
+  {
+    id: 4,
+    nombre: "Cochecito Paraguita Ultraliviano",
+    categoria: "Carritos",
+    precio: 145000,
+    imagen: "/img/coche-ultraliviano.webp",
+    descripcion: "Cochecito ligero, fácil de plegar con una mano. Capota con visor y respaldo reclinable en múltiples posiciones.",
+    stock: 20,
+    destacado: false,
+    oferta: true
+  },
+  {
+    id: 5,
+    nombre: "Cochecito Deluxe",
+    categoria: "Carritos",
+    precio: 780000,
+    imagen: "/img/coche-deluxe.webp",
+    descripcion: "Cochecito con un andar suave y estable, pensado para adaptarse a cada etapa con diseño, confort y funcionalidad.",
+    stock: 0,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 6,
+    nombre: "Mecedora Mega Baby",
+    categoria: "Mecedoras",
+    precio: 95000,
+    imagen: "/img/mecedora-mega.webp",
+    descripcion: "Mecedora con balanceo natural generado por los movimientos del bebé. Soporte ergonómico para la cabeza y espalda.",
+    stock: 15,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 7,
+    nombre: "Mecedora Eléctrica Inteligente Bluetooth",
+    categoria: "Mecedoras",
+    precio: 210000,
+    imagen: "/img/mecedora-electrica.webp",
+    descripcion: "Silla mecedora automática con 5 velocidades, melodías integradas y control a través de Bluetooth desde el celular.",
+    stock: 3,
+    destacado: false,
+    oferta: true
+  },
+  {
+    id: 8,
+    nombre: "Practicuna Plegable con Cambiador",
+    categoria: "Cunas",
+    precio: 195000,
+    imagen: "/img/practicuna.webp",
+    descripcion: "Practicuna de dos niveles con organizador, bolso de viaje y cambiador desmontable. Laterales de red para máxima ventilación.",
+    stock: 10,
+    destacado: true,
+    oferta: false
+  },
+  {
+    id: 9,
+    nombre: "Cuna Funcional Toledo",
+    categoria: "Cunas",
+    precio: 350000,
+    imagen: "/img/cuna-funcional.webp",
+    descripcion: "Cuna de estilo Toledo que se transforma en cama de una plaza. Incluye cajonera y baúl para guardar juguetes.",
+    stock: 4,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 10,
+    nombre: "Butaca Auto Montreal",
+    categoria: "Butacas",
+    precio: 380000,
+    imagen: "/img/butaca-montreal.webp",
+    descripcion: "Butaca evolutiva giratoria 360° con anclaje Isofix. Acompaña el crecimiento del bebé desde el nacimiento hasta los 36kg.",
+    stock: 6,
+    destacado: true,
+    oferta: false
+  },
+  {
+    id: 11,
+    nombre: "Huevito Portabebé Joie",
+    categoria: "Butacas",
+    precio: 145000,
+    imagen: "/img/huevito-joie.webp",
+    descripcion: "La butaca-huevito Joie combina seguridad certificada y comodidad superior, convirtiéndola en la elección perfecta para cada trayecto.",
+    stock: 0,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 12,
+    nombre: "Butaca Booster con Respaldo",
+    categoria: "Butacas",
+    precio: 95000,
+    imagen: "/img/butaca-booster.webp",
+    descripcion: "Asiento elevador con respaldo desmontable y tapizado lavable. Ideal para niños a partir de los 15 kg.",
+    stock: 18,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 13,
+    nombre: "Mochila Maternal Roma",
+    categoria: "Bolsos y Mochilas",
+    precio: 78000,
+    imagen: "/img/mochila-maternal-roma.webp",
+    descripcion: "Mochila resistente al agua con puerto USB, bolsillos térmicos para mamaderas y compartimento para ropa húmeda.",
+    stock: 25,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 14,
+    nombre: "Bolso Maternal Tote",
+    categoria: "Bolsos y Mochilas",
+    precio: 40000,
+    imagen: "/img/bolso-maternal-tote.webp",
+    descripcion: "Amplio bolso maternal de diseño sofisticado. Incluye cambiador acolchado y correas ajustables para colgar del cochecito.",
+    stock: 10,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 15,
+    nombre: "Sacaleches Eléctrico Doble Silencioso",
+    categoria: "Alimentación y Lactancia",
+    precio: 35000,
+    imagen: "/img/sacaleche-doble.webp",
+    descripcion: "Extractor de leche con copa de silicona masajeadora, pantalla digital táctil y modos de estimulación ajustables.",
+    stock: 8,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 16,
+    nombre: "Calentador Portátil Inalámbrico Momcozy",
+    categoria: "Alimentación y Lactancia",
+    precio: 194000,
+    imagen: "/img/calentador-momcozy.webp",
+    descripcion: "Calentador portátil inalámbrico para mamaderas, ideal para llevar a cualquier lugar y mantener la leche a la temperatura ideal.",
+    stock: 35,
+    destacado: false,
+    oferta: false
+  },
+  {
+    id: 17,
+    nombre: "Bañera Plegable con Termómetro Digital",
+    categoria: "Baño y Cuidado",
+    precio: 42000,
+    imagen: "/img/banera-plegable.webp",
+    descripcion: "Bañera de silicona plegable que ocupa mínimo espacio. Incorpora sensor de temperatura digital y almohadón reductor.",
+    stock: 14,
+    destacado: false,
+    oferta: true
+  },
+  {
+    id: 18,
+    nombre: "Catre de baño Oasis",
+    categoria: "Baño y Cuidado",
+    precio: 250000,
+    imagen: "/img/catre-oasis.webp",
+    descripcion: "Catre de baño Oasis, ideal para bañar y cambiar a tu bebé donde te quede más cómodo.",
+    stock: 45,
+    destacado: false,
+    oferta: false
+  }
+];

@@ -1,0 +1,18 @@
+.ofertas-section {
+  position: relative;
+  z-index: 2;
+  background: color-mix(in srgb, var(--hm-durazno-soft) 70%, var(--hm-arena));
+}
+
+.ofertas-section .producto-card--compact .producto-card__nombre {
+  font-size: 0.95rem;
+  min-height: 2.4em;
+}
+
+.ofertas-section .producto-card--compact .producto-card__precio {
+  font-size: 1.05rem;
+}
+
+.ofertas-section .producto-card--compact .producto-card__body {
+  padding: 0.75rem 0.85rem 1rem;
+}

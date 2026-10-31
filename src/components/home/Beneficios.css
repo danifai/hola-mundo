@@ -1,0 +1,103 @@
+.beneficios {
+  position: relative;
+  z-index: 2;
+  background: var(--hm-surface);
+}
+
+.beneficio-item {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0.5rem;
+  width: 100%;
+  color: var(--hm-ink);
+  text-align: center;
+}
+
+.beneficio-item--clickable {
+  cursor: pointer;
+}
+
+.beneficio-item--clickable:hover .beneficio-item__icon,
+.beneficio-item--clickable:focus-visible .beneficio-item__icon {
+  color: var(--hm-accent);
+  transform: translateY(-3px);
+}
+
+.beneficio-item--clickable:focus-visible {
+  outline: 2px solid var(--hm-accent);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.beneficio-item__icon {
+  display: block;
+  font-size: 3.25rem;
+  line-height: 1;
+  color: var(--hm-accent-dark);
+  margin-bottom: 0.85rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.beneficio-item__titulo {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+/* Modal cuotas */
+.cuotas-modal .modal-content {
+  border: 0;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--hm-card);
+  color: var(--hm-ink);
+}
+
+.cuotas-modal .modal-header {
+  border-bottom: 0;
+  justify-content: center;
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+.cuotas-modal .modal-title {
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+}
+
+.cuotas-modal .btn-close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.cuotas-modal .modal-body {
+  padding: 0.5rem 1.5rem 1.75rem;
+}
+
+.cuotas-modal__card {
+  border-radius: 22px;
+  border: 1px solid var(--hm-border);
+  background: var(--hm-surface);
+  padding: 1.25rem 1rem;
+  height: 100%;
+}
+
+/* Los PNG tienen mucho margen transparente: se recorta con cover en caja 2:1 */
+.cuotas-modal__logo {
+  width: 100%;
+  max-width: 190px;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  margin: 0 auto 0.5rem;
+  background: #fff;
+  border-radius: 12px;
+}
+
+.cuotas-modal-backdrop {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(20, 24, 32, 0.55) !important;
+}
