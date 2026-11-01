@@ -48,13 +48,16 @@ function Header({ cantidadCarrito, temaOscuro, onToggleTema }) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [searchParams] = useSearchParams()
-  const [busqueda, setBusqueda] = useState(searchParams.get('q') || '')
+  const qParam = searchParams.get('q') || ''
+  const [busqueda, setBusqueda] = useState(qParam)
+  const [busquedaParamAnterior, setBusquedaParamAnterior] = useState(qParam)
   const [compacto, setCompacto] = useState(false)
   const headerRef = useRef(null)
 
-  useEffect(() => {
-    setBusqueda(searchParams.get('q') || '')
-  }, [searchParams])
+  if (qParam !== busquedaParamAnterior) {
+    setBusquedaParamAnterior(qParam)
+    setBusqueda(qParam)
+  }
 
   // Guarda la altura del header "completo" para que el hero se ubique debajo
   useEffect(() => {
@@ -107,13 +110,13 @@ function Header({ cantidadCarrito, temaOscuro, onToggleTema }) {
   return (
     <Navbar
       ref={headerRef}
-      expand="lg"
+      expand="xl"
       sticky="top"
       className={`hm-header py-2${compacto ? ' hm-header--compact' : ''}`}
       bg={temaOscuro ? 'dark' : 'light'}
       data-bs-theme={temaOscuro ? 'dark' : 'light'}
     >
-      <Container fluid="xl" className="hm-header__bar gap-3">
+      <Container fluid="xxl" className="hm-header__bar gap-3">
         <Navbar.Brand as={Link} to="/" className="hm-header__brand me-0" aria-label="Hola Mundo - Inicio">
           <span className="hm-header__logo-box">
             <img src="/img/logo.jpg" alt="Hola Mundo" className="hm-header__logo" />

@@ -5,13 +5,15 @@
   overflow: hidden;
 }
 
+/* ==========================================================================
+   Carrusel 3D especial de Novedades (exclusivo para desktop >= 1200px)
+   ========================================================================== */
 .novedades-rotator {
   --card-w: 290px;
   --shift: 420px;
   position: relative;
 }
 
-/* Todas las tarjetas comparten la misma celda: la altura la da la más alta */
 .novedades-rotator__stage {
   display: grid;
   justify-items: center;
@@ -51,7 +53,6 @@
   z-index: 2;
 }
 
-/* La que no se ve: queda detrás de la central, lista para entrar por la derecha */
 .novedades-rotator__item--oculta {
   transform: translateX(0) scale(0.6);
   opacity: 0;
@@ -95,6 +96,7 @@
   right: 0;
 }
 
+/* Dots indicadores comunes */
 .novedades-rotator__dot {
   width: 10px;
   height: 10px;
@@ -112,27 +114,9 @@
   transform: scale(1.3);
 }
 
-@media (max-width: 1199.98px) {
-  .novedades-rotator {
-    --shift: 360px;
-  }
-}
-
-@media (max-width: 991.98px) {
-  .novedades-rotator {
-    --card-w: 260px;
-    --shift: 230px;
-  }
-}
-
-@media (max-width: 575.98px) {
-  .novedades-rotator {
-    --card-w: 240px;
-    --shift: 200px;
-  }
-
-  .novedades-rotator__arrow {
-    width: 38px;
-    height: 38px;
+@media (max-width: 767.98px) {
+  .novedades-rotator__dot {
+    width: 12px;
+    height: 12px;
   }
 }

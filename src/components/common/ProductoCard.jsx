@@ -54,10 +54,19 @@ function ProductoCard({ producto, onAgregar, compact = false }) {
         />
       </div>
       <Card.Body className="producto-card__body">
-        <span className="producto-card__categoria">{producto.categoria}</span>
+        <div className="d-flex align-items-center justify-content-between">
+          <span className="producto-card__categoria">{producto.categoria}</span>
+          <span className={`producto-card__stock ${sinStock ? 'text-danger' : 'text-success'}`}>
+            <i className={`bi ${sinStock ? 'bi-x-circle' : 'bi-check2-circle'} me-1`} />
+            {sinStock ? 'Sin stock' : `${producto.stock} disp.`}
+          </span>
+        </div>
         <Card.Title as="h3" className="producto-card__nombre">
           {producto.nombre}
         </Card.Title>
+        {producto.descripcion && (
+          <p className="producto-card__descripcion">{producto.descripcion}</p>
+        )}
         <p className="producto-card__precio">{formatearPrecio(producto.precio)}</p>
         <div className="producto-card__actions">
           <Button

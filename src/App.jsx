@@ -57,8 +57,14 @@ function App() {
             path="/"
             element={<Inicio onAgregarAlCarrito={agregarAlCarrito} />}
           />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/producto/:id" element={<DetalleProducto />} />
+          <Route
+            path="/productos"
+            element={<Productos onAgregarAlCarrito={agregarAlCarrito} />}
+          />
+          <Route
+            path="/producto/:id"
+            element={<DetalleProducto onAgregarAlCarrito={agregarAlCarrito} />}
+          />
           <Route path="/carrito" element={<Carrito carrito={carrito} />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />

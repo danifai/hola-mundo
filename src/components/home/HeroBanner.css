@@ -1,11 +1,17 @@
-/* Espacio que ocupa el hero dentro del flujo; la imagen va fija detrás */
+/* ==========================================================================
+   Hero Banner - Hola Mundo
+   Desktop (>= 1200px): Efecto parallax/cover con imagen fija
+   Tablet (768px - 1199px): Imagen ajustada al ancho en flujo natural
+   Mobile (<= 767px): Imagen vertical adaptada al ancho en flujo natural
+   ========================================================================== */
+
+/* Versión Desktop: la imagen va fija detrás con efecto cover */
 .hero-parallax {
   position: relative;
   height: 88vh;
   min-height: 420px;
 }
 
-/* Empieza debajo del header (altura medida en Header.jsx) para no quedar tapada */
 .hero-parallax__bg {
   position: fixed;
   top: var(--hm-header-full, 130px);
@@ -19,16 +25,60 @@
   background-size: cover;
 }
 
-/* Mobile / vertical: usa la versión vertical de la imagen */
-@media (max-width: 767.98px), (orientation: portrait) {
+/* Versión Tablet: imagen fondo_bebe ajustada al ancho de la pantalla en flujo natural */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .hero-parallax {
+    position: relative;
+    height: auto;
+    min-height: unset;
+    width: 100%;
+    overflow: hidden;
+  }
+
   .hero-parallax__bg {
-    background-image: url('/img/fondo_bebe_vertical.jpg');
-    background-position: center top;
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    aspect-ratio: 2752 / 1536;
+    height: auto;
+    min-height: unset;
+    max-height: 480px;
+    background-image: url('/img/fondo_bebe.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
   }
 }
 
+/* Versión Mobile: se anula el parallax fijo y la imagen vertical se achica ajustada al ancho */
 @media (max-width: 767.98px) {
   .hero-parallax {
-    height: 80vh;
+    position: relative;
+    height: auto;
+    min-height: unset;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .hero-parallax__bg {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    aspect-ratio: 2912 / 1440;
+    height: auto;
+    min-height: unset;
+    max-height: none;
+    background-image: url('/img/fondo_bebe_vertical.jpg');
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1;
   }
 }

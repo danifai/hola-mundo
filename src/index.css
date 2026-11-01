@@ -114,6 +114,29 @@ p {
   z-index: 1;
 }
 
+/* Ancho de contenedores optimizado para pantallas de escritorio */
+@media (min-width: 1400px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    max-width: 1420px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container,
+  .container-sm,
+  .container-md,
+  .container-lg,
+  .container-xl,
+  .container-xxl {
+    max-width: 1540px;
+  }
+}
+
 .section-block {
   padding: 4rem 0;
 }
@@ -226,11 +249,34 @@ p {
   font-weight: 700;
 }
 
+.producto-card__stock {
+  font-size: 0.76rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+}
+
 .producto-card__nombre {
   font-size: 1.05rem;
   line-height: 1.3;
   margin: 0;
   min-height: 2.6em;
+}
+
+.producto-card__descripcion {
+  font-size: 0.85rem;
+  color: var(--hm-muted);
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4em;
+}
+
+.producto-card--compact .producto-card__descripcion {
+  display: none;
 }
 
 .producto-card__precio {
@@ -256,4 +302,66 @@ p {
 
 .badge-nuevo {
   background: var(--hm-accent) !important;
+}
+
+/* Carrusel común de tarjetas para Tablet y Mobile */
+.hm-cards-slider {
+  position: relative;
+  padding: 0.5rem 0 1rem;
+}
+
+.hm-cards-slider__track {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.25rem;
+}
+
+.hm-cards-slider__item {
+  width: min(86%, 320px);
+}
+
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .hm-cards-slider__item {
+    width: 320px;
+  }
+}
+
+.hm-cards-slider__arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 6;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--hm-border);
+  background: color-mix(in srgb, var(--hm-card) 96%, transparent);
+  color: var(--hm-accent-dark);
+  box-shadow: var(--hm-shadow);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hm-cards-slider__arrow:hover {
+  background: var(--hm-card);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.hm-cards-slider__arrow--prev {
+  left: 0;
+}
+
+.hm-cards-slider__arrow--next {
+  right: 0;
+}
+
+/* En mobile se ocultan las flechas para usar swipe táctil */
+@media (max-width: 767.98px) {
+  .hm-cards-slider__arrow {
+    display: none !important;
+  }
 }
