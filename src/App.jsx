@@ -4,6 +4,7 @@ import FloatingCatalogo from './components/layout/FloatingCatalogo'
 import FloatingWhatsApp from './components/layout/FloatingWhatsApp'
 import Footer from './components/layout/Footer'
 import Header from './components/layout/Header'
+import ScrollToTop from './components/layout/ScrollToTop'
 import Carrito from './pages/Carrito'
 import DetalleProducto from './pages/DetalleProducto'
 import Inicio from './pages/Inicio'
@@ -89,6 +90,7 @@ function App() {
 
   return (
     <div className="app-shell">
+      <ScrollToTop />
       <Header
         cantidadCarrito={cantidadCarrito}
         temaOscuro={temaOscuro}
