@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap'
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { productos } from '../../data/productos'
+import MiniCarritoOffcanvas from './MiniCarritoOffcanvas'
 import './Header.css'
 
 const categorias = [...new Set(productos.map((p) => p.categoria))]
@@ -44,7 +45,14 @@ function CategoriaDropdown({ categoria, items }) {
   )
 }
 
-function Header({ cantidadCarrito, temaOscuro, onToggleTema }) {
+function Header({
+  cantidadCarrito,
+  temaOscuro,
+  onToggleTema,
+  carrito = [],
+  onModificarCantidadCarrito,
+  onEliminarDelCarrito,
+}) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [searchParams] = useSearchParams()
@@ -52,6 +60,7 @@ function Header({ cantidadCarrito, temaOscuro, onToggleTema }) {
   const [busqueda, setBusqueda] = useState(qParam)
   const [busquedaParamAnterior, setBusquedaParamAnterior] = useState(qParam)
   const [compacto, setCompacto] = useState(false)
+  const [showMiniCarrito, setShowMiniCarrito] = useState(false)
   const headerRef = useRef(null)
 
   if (qParam !== busquedaParamAnterior) {
@@ -158,11 +167,11 @@ function Header({ cantidadCarrito, temaOscuro, onToggleTema }) {
               </Button>
 
               <Button
-                as={Link}
-                to="/carrito"
+                type="button"
                 variant="link"
                 className="hm-cart-btn position-relative"
-                aria-label="Ir al carrito"
+                onClick={() => setShowMiniCarrito(true)}
+                aria-label="Abrir resumen del carrito"
               >
                 <i className="bi bi-cart3" aria-hidden="true" />
                 {cantidadCarrito > 0 && (
@@ -184,6 +193,15 @@ function Header({ cantidadCarrito, temaOscuro, onToggleTema }) {
           </Nav>
         </Navbar.Collapse>
       </Container>
+
+      {/* Resumen lateral de carrito estilo Carestino */}
+      <MiniCarritoOffcanvas
+        show={showMiniCarrito}
+        onHide={() => setShowMiniCarrito(false)}
+        carrito={carrito}
+        onModificarCantidad={onModificarCantidadCarrito}
+        onEliminar={onEliminarDelCarrito}
+      />
     </Navbar>
   )
 }
