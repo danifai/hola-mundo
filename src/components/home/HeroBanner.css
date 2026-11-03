@@ -19,7 +19,7 @@
   bottom: 0;
   left: 0;
   z-index: 0;
-  background-image: url('/img/fondo_bebe.jpg');
+  background-image: var(--hero-bg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -46,7 +46,7 @@
     height: auto;
     min-height: unset;
     max-height: 480px;
-    background-image: url('/img/fondo_bebe.jpg');
+    background-image: var(--hero-bg);
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -75,7 +75,7 @@
     height: auto;
     min-height: unset;
     max-height: none;
-    background-image: url('/img/fondo_bebe_vertical.jpg');
+    background-image: var(--hero-bg-mobile);
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;

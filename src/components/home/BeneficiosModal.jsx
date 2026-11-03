@@ -1,17 +1,18 @@
 import { Col, Modal, Row } from 'react-bootstrap'
+import { publicUrl } from '../../utils/assets'
 
 const MEDIOS = [
   {
     id: 'visa',
     nombre: 'Visa',
     texto: 'Hasta 6 cuotas sin interés',
-    logo: '/img/visa.png',
+    logo: publicUrl('img/visa.png'),
   },
   {
     id: 'mastercard',
     nombre: 'Mastercard',
     texto: 'Hasta 12 cuotas sin interés',
-    logo: '/img/mastercard.png',
+    logo: publicUrl('img/mastercard.png'),
   },
 ]
 

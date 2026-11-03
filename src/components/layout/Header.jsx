@@ -10,6 +10,7 @@ import {
 } from 'react-bootstrap'
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { productos } from '../../data/productos'
+import { publicUrl } from '../../utils/assets'
 import MiniCarritoOffcanvas from './MiniCarritoOffcanvas'
 import './Header.css'
 
@@ -128,7 +129,7 @@ function Header({
       <Container fluid="xxl" className="hm-header__bar gap-3">
         <Navbar.Brand as={Link} to="/" className="hm-header__brand me-0" aria-label="Hola Mundo - Inicio">
           <span className="hm-header__logo-box">
-            <img src="/img/logo.jpg" alt="Hola Mundo" className="hm-header__logo" />
+            <img src={publicUrl('img/logo.jpg')} alt="Hola Mundo" className="hm-header__logo" />
           </span>
         </Navbar.Brand>
 
