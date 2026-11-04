@@ -149,7 +149,35 @@ function Header({
           </span>
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="hm-main-nav" className="ms-auto" />
+        <div className="hm-header__mobile-actions d-flex align-items-center gap-2">
+          <Button
+            type="button"
+            variant="link"
+            className="hm-theme-btn"
+            onClick={onToggleTema}
+            aria-label={temaOscuro ? 'Activar modo claro' : 'Activar modo oscuro'}
+          >
+            <i
+              className={`bi ${temaOscuro ? 'bi-sun-fill' : 'bi-moon-stars-fill'}`}
+              aria-hidden="true"
+            />
+          </Button>
+
+          <Button
+            type="button"
+            variant="link"
+            className="hm-cart-btn position-relative"
+            onClick={() => setShowMiniCarrito(true)}
+            aria-label="Abrir resumen del carrito"
+          >
+            <i className="bi bi-cart3" aria-hidden="true" />
+            {cantidadCarrito > 0 && (
+              <span className="hm-cart-btn__count">{cantidadCarrito}</span>
+            )}
+          </Button>
+        </div>
+        
+        <Navbar.Toggle aria-controls="hm-main-nav" />
 
         <Navbar.Collapse id="hm-main-nav" className="hm-header__collapse">
           {/* Fila 1: buscador centrado + acciones a la derecha */}

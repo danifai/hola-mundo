@@ -201,6 +201,12 @@
   line-height: 1;
 }
 
+@media (min-width: 1200px) {
+  .hm-header__mobile-actions {
+    display: none !important;
+  }
+}
+
 @media (max-width: 1199.98px) {
   .hm-header__logo-box {
     width: 140px;
@@ -219,5 +225,15 @@
 
   .hm-header__cats {
     justify-content: flex-start;
+  }
+
+  .hm-header.navbar .hm-header__mobile-actions {
+    display: flex !important;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .hm-header.navbar .hm-header__collapse .hm-header__actions {
+    display: none !important;
   }
 }
