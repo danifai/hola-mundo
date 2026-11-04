@@ -220,7 +220,9 @@ function Header({
               >
                 <i className="bi bi-cart3" aria-hidden="true" />
                 {cantidadCarrito > 0 && (
-                  <span className="hm-cart-btn__count">{cantidadCarrito}</span>
+                  <span key={cantidadCarrito} className="hm-cart-btn__count">
+                    {cantidadCarrito}
+                  </span>
                 )}
               </Button>
             </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Alert,
   Badge,
@@ -35,6 +35,15 @@ function DetalleProducto({ onAgregarAlCarrito }) {
   // Estado para la cantidad a agregar
   const [cantidad, setCantidad] = useState(1)
   const [toastMensaje, setToastMensaje] = useState(null)
+  const [agregado, setAgregado] = useState(false)
+
+  useEffect(() => {
+    if (!agregado) return
+    const timer = setTimeout(() => {
+      setAgregado(false)
+    }, 1400)
+    return () => clearTimeout(timer)
+  }, [agregado])
 
   // Si el producto no existe en el catálogo
   if (!producto) {
@@ -86,8 +95,9 @@ function DetalleProducto({ onAgregarAlCarrito }) {
   }
 
   const handleAgregar = () => {
-    if (sinStock || !onAgregarAlCarrito) return
+    if (sinStock || !onAgregarAlCarrito || agregado) return
     onAgregarAlCarrito(producto, cantidad)
+    setAgregado(true)
     setToastMensaje(
       `¡Agregaste ${cantidad} ${cantidad === 1 ? 'unidad' : 'unidades'} de "${producto.nombre}" al carrito!`
     )
@@ -286,13 +296,22 @@ function DetalleProducto({ onAgregarAlCarrito }) {
                           Acción
                         </label>
                         <Button
-                          className="btn-hm w-100 py-2 d-flex align-items-center justify-content-center gap-2"
+                          className={`btn-hm w-100 py-2 d-flex align-items-center justify-content-center gap-2 ${agregado ? 'btn-hm-agregado' : ''}`}
                           size="lg"
-                          disabled={sinStock}
+                          disabled={sinStock || agregado}
                           onClick={handleAgregar}
                         >
-                          <i className="bi bi-cart-plus-fill fs-5" aria-hidden="true" />
-                          <span>{sinStock ? 'Sin stock disponible' : 'Agregar al carrito'}</span>
+                          <i
+                            className={`bi ${agregado ? 'bi-check2' : 'bi-cart-plus-fill'} fs-5`}
+                            aria-hidden="true"
+                          />
+                          <span>
+                            {sinStock
+                              ? 'Sin stock disponible'
+                              : agregado
+                              ? '¡Agregado al carrito!'
+                              : 'Agregar al carrito'}
+                          </span>
                         </Button>
                       </div>
                     </div>
@@ -342,7 +361,7 @@ function DetalleProducto({ onAgregarAlCarrito }) {
           onClose={() => setToastMensaje(null)}
           delay={3000}
           autohide
-          className="rounded-pill shadow border-0"
+          className="rounded-pill shadow border-0 hm-toast-slide-up"
         >
           <Toast.Body className="d-flex align-items-center gap-2 px-4 py-2">
             <i className="bi bi-check-circle-fill text-success fs-5" aria-hidden="true" />

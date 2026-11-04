@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Badge, Button, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -10,6 +11,21 @@ const formatearPrecio = (precio) =>
 
 function ProductoCard({ producto, onAgregar, compact = false }) {
   const sinStock = producto.stock === 0
+  const [agregado, setAgregado] = useState(false)
+
+  useEffect(() => {
+    if (!agregado) return
+    const timer = setTimeout(() => {
+      setAgregado(false)
+    }, 1400)
+    return () => clearTimeout(timer)
+  }, [agregado])
+
+  const handleAgregar = () => {
+    if (sinStock || agregado) return
+    onAgregar?.(producto)
+    setAgregado(true)
+  }
 
   const handleImgError = (event) => {
     event.currentTarget.src =
@@ -79,12 +95,28 @@ function ProductoCard({ producto, onAgregar, compact = false }) {
             Ver detalle
           </Button>
           <Button
-            className="btn-hm"
+            className={`btn-hm ${agregado ? 'btn-hm-agregado' : ''}`}
             size="sm"
-            disabled={sinStock}
-            onClick={() => onAgregar?.(producto)}
+            disabled={sinStock || agregado}
+            onClick={handleAgregar}
+            aria-label={
+              sinStock
+                ? `Sin stock de ${producto.nombre}`
+                : agregado
+                ? `¡${producto.nombre} agregado al carrito!`
+                : `Agregar ${producto.nombre} al carrito`
+            }
           >
-            {sinStock ? 'Sin stock' : 'Agregar'}
+            {sinStock ? (
+              'Sin stock'
+            ) : agregado ? (
+              <span className="d-inline-flex align-items-center gap-1">
+                <i className="bi bi-check2" />
+                ¡Agregado!
+              </span>
+            ) : (
+              'Agregar'
+            )}
           </Button>
         </div>
       </Card.Body>
