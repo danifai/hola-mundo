@@ -16,19 +16,35 @@ import './Header.css'
 
 const categorias = [...new Set(productos.map((p) => p.categoria))]
 
-function CategoriaDropdown({ categoria, items }) {
+function CategoriaDropdown({ categoria, items, esUltima }) {
   const [show, setShow] = useState(false)
+  const timeoutRef = useRef(null)
   const esDesktop = () => window.matchMedia('(min-width: 992px)').matches
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current)
+  }, [])
 
   return (
     <NavDropdown
       title={categoria}
       id={`cat-${categoria}`}
       className="hm-header__dropdown"
+      align={esUltima ? 'end' : undefined}
       show={show}
       onToggle={(next) => setShow(next)}
-      onMouseEnter={() => esDesktop() && setShow(true)}
-      onMouseLeave={() => esDesktop() && setShow(false)}
+      onMouseEnter={() => {
+        if (!esDesktop()) return
+        
+        clearTimeout(timeoutRef.current)
+        setShow(true)
+      }}
+      onMouseLeave={() => {
+        if (!esDesktop()) return
+        timeoutRef.current = setTimeout(() => {
+          setShow(false)
+        }, 15)
+      }}
     >
       <NavDropdown.Item
         as={Link}
@@ -133,7 +149,35 @@ function Header({
           </span>
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="hm-main-nav" className="ms-auto" />
+        <div className="hm-header__mobile-actions d-flex align-items-center gap-2">
+          <Button
+            type="button"
+            variant="link"
+            className="hm-theme-btn"
+            onClick={onToggleTema}
+            aria-label={temaOscuro ? 'Activar modo claro' : 'Activar modo oscuro'}
+          >
+            <i
+              className={`bi ${temaOscuro ? 'bi-sun-fill' : 'bi-moon-stars-fill'}`}
+              aria-hidden="true"
+            />
+          </Button>
+
+          <Button
+            type="button"
+            variant="link"
+            className="hm-cart-btn position-relative"
+            onClick={() => setShowMiniCarrito(true)}
+            aria-label="Abrir resumen del carrito"
+          >
+            <i className="bi bi-cart3" aria-hidden="true" />
+            {cantidadCarrito > 0 && (
+              <span className="hm-cart-btn__count">{cantidadCarrito}</span>
+            )}
+          </Button>
+        </div>
+        
+        <Navbar.Toggle aria-controls="hm-main-nav" />
 
         <Navbar.Collapse id="hm-main-nav" className="hm-header__collapse">
           {/* Fila 1: buscador centrado + acciones a la derecha */}
@@ -186,11 +230,12 @@ function Header({
 
           {/* Fila 2: categorías */}
           <Nav className="hm-header__cats">
-            {categorias.map((categoria) => (
+            {categorias.map((categoria, index) => (
               <CategoriaDropdown
                 key={categoria}
                 categoria={categoria}
                 items={productos.filter((p) => p.categoria === categoria)}
+                esUltima={index === categorias.length - 1}
               />
             ))}
           </Nav>

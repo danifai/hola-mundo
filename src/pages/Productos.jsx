@@ -141,7 +141,7 @@ function Productos({ onAgregarAlCarrito }) {
       {/* Cabecera / Banner de la página */}
       <Container className="text-center mb-4">
         <h1 className="fw-bold mb-2">Catálogo de Productos</h1>
-        <p className="text-muted mx-auto" style={{ maxWidth: '620px' }}>
+        <p className="hm-text-muted mx-auto" style={{ maxWidth: '620px' }}>
           Descubrí todo lo necesario para acompañar cada etapa de tu bebé:
           diseño, seguridad y el confort que tu familia necesita.
         </p>
@@ -248,8 +248,8 @@ function Productos({ onAgregarAlCarrito }) {
 
         {/* Resumen de resultados y badges de filtros activos */}
         <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
-          <span className="text-muted small fw-semibold">
-            Mostrando <strong className="text-body">{productosFiltrados.length}</strong> de{' '}
+          <span className="hm-text-muted small fw-semibold">
+            Mostrando <strong className="hm-text">{productosFiltrados.length}</strong> de{' '}
             {productos.length} productos
           </span>
 
@@ -354,7 +354,7 @@ function Productos({ onAgregarAlCarrito }) {
         >
           <Toast.Body className="d-flex align-items-center gap-2 px-4 py-2">
             <i className="bi bi-check-circle-fill text-success fs-5" aria-hidden="true" />
-            <span className="fw-semibold">{toastMensaje}</span>
+            <span className="text-dark fw-semibold">{toastMensaje}</span>
           </Toast.Body>
         </Toast>
       </ToastContainer>

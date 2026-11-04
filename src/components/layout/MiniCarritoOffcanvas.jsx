@@ -46,13 +46,13 @@ function MiniCarritoOffcanvas({ show, onHide, carrito, onModificarCantidad, onEl
         </Offcanvas.Title>
       </Offcanvas.Header>
 
-      <Offcanvas.Body className="d-flex flex-column justify-content-between p-3">
+      <Offcanvas.Body className="d-flex flex-column justify-content-between p-3 overflow-x-hidden">
         {carrito.length === 0 ? (
           <div className="text-center my-auto py-5">
             <div className="display-4 text-muted mb-3 opacity-50">
               <i className="bi bi-cart-x" />
             </div>
-            <h5 className="fw-bold mb-2">Tu carrito está vacío</h5>
+            <h5 className="text-dark fw-bold mb-2">Tu carrito está vacío</h5>
             <p className="text-muted small mb-4">
               ¡Aún no agregaste productos! Descubrí nuestras novedades y ofertas.
             </p>
@@ -72,7 +72,7 @@ function MiniCarritoOffcanvas({ show, onHide, carrito, onModificarCantidad, onEl
               {carrito.map((item) => (
                 <div
                   key={item.id}
-                  className="d-flex align-items-center gap-3 py-3 border-bottom"
+                  className="d-flex align-items-center gap-3 py-3 border-bottom overflow-hidden"
                 >
                   {/* Imagen del producto */}
                   <div
@@ -92,7 +92,7 @@ function MiniCarritoOffcanvas({ show, onHide, carrito, onModificarCantidad, onEl
                     <Link
                       to={`/producto/${item.id}`}
                       onClick={onHide}
-                      className="text-decoration-none text-dark fw-bold small d-block text-truncate mb-1"
+                      className="text-decoration-none text-dark fw-bold small d-block text-break mb-1"
                       title={item.nombre}
                     >
                       {item.nombre}
