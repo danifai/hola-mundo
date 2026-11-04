@@ -525,11 +525,11 @@ p {
   border: 2px solid var(--hm-border);
 }
 
-/* Badge de cabecera con alto contraste garantizado para modo claro y oscuro */
+/* Badge de cabecera con alto contraste y tamaño destacado */
 .hm-pill-badge {
   display: inline-block;
-  padding: 0.42rem 1.15rem;
-  font-size: 0.8rem;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.92rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;

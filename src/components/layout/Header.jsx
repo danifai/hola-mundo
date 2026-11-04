@@ -16,7 +16,7 @@ import './Header.css'
 
 const categorias = [...new Set(productos.map((p) => p.categoria))]
 
-function CategoriaDropdown({ categoria, items, esUltima }) {
+function CategoriaDropdown({ categoria, items, esUltima, onSeleccionar }) {
   const [show, setShow] = useState(false)
   const timeoutRef = useRef(null)
   const esDesktop = () => window.matchMedia('(min-width: 992px)').matches
@@ -49,12 +49,24 @@ function CategoriaDropdown({ categoria, items, esUltima }) {
       <NavDropdown.Item
         as={Link}
         to={`/productos?categoria=${encodeURIComponent(categoria)}`}
+        onClick={() => {
+          setShow(false)
+          onSeleccionar?.()
+        }}
       >
         Ver {categoria}
       </NavDropdown.Item>
       <NavDropdown.Divider />
       {items.map((producto) => (
-        <NavDropdown.Item as={Link} key={producto.id} to={`/producto/${producto.id}`}>
+        <NavDropdown.Item
+          as={Link}
+          key={producto.id}
+          to={`/producto/${producto.id}`}
+          onClick={() => {
+            setShow(false)
+            onSeleccionar?.()
+          }}
+        >
           {producto.nombre}
         </NavDropdown.Item>
       ))}
@@ -71,18 +83,25 @@ function Header({
   onEliminarDelCarrito,
 }) {
   const navigate = useNavigate()
-  const { pathname } = useLocation()
+  const { pathname, search } = useLocation()
   const [searchParams] = useSearchParams()
   const qParam = searchParams.get('q') || ''
   const [busqueda, setBusqueda] = useState(qParam)
   const [busquedaParamAnterior, setBusquedaParamAnterior] = useState(qParam)
   const [compacto, setCompacto] = useState(false)
   const [showMiniCarrito, setShowMiniCarrito] = useState(false)
+  const [menuAbierto, setMenuAbierto] = useState(false)
   const headerRef = useRef(null)
 
   if (qParam !== busquedaParamAnterior) {
     setBusquedaParamAnterior(qParam)
     setBusqueda(qParam)
+  }
+
+  const [prevLocation, setPrevLocation] = useState({ pathname, search })
+  if (prevLocation.pathname !== pathname || prevLocation.search !== search) {
+    setPrevLocation({ pathname, search })
+    setMenuAbierto(false)
   }
 
   // Guarda la altura del header "completo" para que el hero se ubique debajo
@@ -130,6 +149,7 @@ function Header({
   const handleBuscar = (event) => {
     event.preventDefault()
     const query = busqueda.trim()
+    setMenuAbierto(false)
     navigate(query ? `/productos?q=${encodeURIComponent(query)}` : '/productos')
   }
 
@@ -138,12 +158,20 @@ function Header({
       ref={headerRef}
       expand="xl"
       sticky="top"
+      expanded={menuAbierto}
+      onToggle={(next) => setMenuAbierto(next)}
       className={`hm-header py-2${compacto ? ' hm-header--compact' : ''}`}
       bg={temaOscuro ? 'dark' : 'light'}
       data-bs-theme={temaOscuro ? 'dark' : 'light'}
     >
       <Container fluid="xxl" className="hm-header__bar gap-3">
-        <Navbar.Brand as={Link} to="/" className="hm-header__brand me-0" aria-label="Hola Mundo - Inicio">
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          className="hm-header__brand me-0"
+          aria-label="Hola Mundo - Inicio"
+          onClick={() => setMenuAbierto(false)}
+        >
           <span className="hm-header__logo-box">
             <img src={publicUrl('img/logo.jpg')} alt="Hola Mundo" className="hm-header__logo" />
           </span>
@@ -167,7 +195,10 @@ function Header({
             type="button"
             variant="link"
             className="hm-cart-btn position-relative"
-            onClick={() => setShowMiniCarrito(true)}
+            onClick={() => {
+              setMenuAbierto(false)
+              setShowMiniCarrito(true)
+            }}
             aria-label="Abrir resumen del carrito"
           >
             <i className="bi bi-cart3" aria-hidden="true" />
@@ -177,7 +208,11 @@ function Header({
           </Button>
         </div>
         
-        <Navbar.Toggle aria-controls="hm-main-nav" />
+        <Navbar.Toggle
+          aria-controls="hm-main-nav"
+          aria-label={menuAbierto ? 'Cerrar navegación' : 'Abrir navegación'}
+          onClick={() => setMenuAbierto((prev) => !prev)}
+        />
 
         <Navbar.Collapse id="hm-main-nav" className="hm-header__collapse">
           {/* Fila 1: buscador centrado + acciones a la derecha */}
@@ -215,7 +250,10 @@ function Header({
                 type="button"
                 variant="link"
                 className="hm-cart-btn position-relative"
-                onClick={() => setShowMiniCarrito(true)}
+                onClick={() => {
+                  setMenuAbierto(false)
+                  setShowMiniCarrito(true)
+                }}
                 aria-label="Abrir resumen del carrito"
               >
                 <i className="bi bi-cart3" aria-hidden="true" />
@@ -236,6 +274,7 @@ function Header({
                 categoria={categoria}
                 items={productos.filter((p) => p.categoria === categoria)}
                 esUltima={index === categorias.length - 1}
+                onSeleccionar={() => setMenuAbierto(false)}
               />
             ))}
           </Nav>

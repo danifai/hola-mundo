@@ -87,7 +87,7 @@ function Nosotros() {
                   Un proyecto universitario que une tecnología y ternura
                 </h2>
                 <p className="text-muted mb-3 lh-base">
-                  <strong>Hola Mundo</strong> nació como un proyecto integrador desarrollado por 3
+                  <strong>Hola Mundo</strong> nació como un proyecto académico desarrollado por 3
                   estudiantes de la <strong>Universidad Nacional de Hurlingham (UNAHUR)</strong> para
                   la materia <em>Construcción de Interfaces de Usuario</em>.
                 </p>
@@ -119,7 +119,7 @@ function Nosotros() {
                   </div>
                   <div className="d-flex justify-content-between small text-muted mb-2">
                     <span>Modalidad:</span>
-                    <strong className="text-dark">Trabajo Práctico Integrador</strong>
+                    <strong className="text-dark">Trabajo Práctico 1</strong>
                   </div>
                   <div className="d-flex justify-content-between small text-muted">
                     <span>Tecnologías:</span>
