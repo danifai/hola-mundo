@@ -186,6 +186,24 @@ p {
   border-radius: 999px;
   font-weight: 700;
   padding-inline: 1.25rem;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-hm:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.btn-hm-agregado,
+.btn-hm-agregado:disabled {
+  --bs-btn-bg: #38a169 !important;
+  --bs-btn-border-color: #38a169 !important;
+  --bs-btn-color: #ffffff !important;
+  background-color: #38a169 !important;
+  border-color: #38a169 !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  transform: scale(0.98);
+  transition: all 0.25s ease;
 }
 
 .btn-hm-outline {
@@ -196,6 +214,73 @@ p {
   --bs-btn-hover-color: var(--hm-ink);
   border-radius: 999px;
   font-weight: 700;
+}
+
+/* Animación de entrada suave para Toasts de confirmación */
+.hm-toast-slide-up {
+  animation: toastSlideUp 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+}
+
+@keyframes toastSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animaciones del Modal de Transacción de Compra */
+.hm-modal-processing-spinner {
+  width: 4rem;
+  height: 4rem;
+  color: var(--hm-accent);
+  border-width: 0.35rem;
+}
+
+.hm-modal-success-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: rgba(72, 187, 120, 0.16);
+  color: #38a169;
+  font-size: 3rem;
+  animation: hmCheckPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes hmCheckPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hm-fade-in {
+  animation: hmFadeIn 0.35s ease-out forwards;
+}
+
+@keyframes hmFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .producto-card {
@@ -364,4 +449,89 @@ p {
   .hm-cards-slider__arrow {
     display: none !important;
   }
+}
+
+/* Estilos para el Accordion de Preguntas Frecuentes */
+.hm-accordion .accordion-item {
+  border-radius: var(--hm-radius) !important;
+  border: 1px solid var(--hm-border) !important;
+  margin-bottom: 0.85rem;
+  background: var(--hm-card);
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(61, 58, 69, 0.04);
+}
+
+.hm-accordion .accordion-button {
+  font-weight: 700;
+  color: var(--hm-ink);
+  background: var(--hm-card);
+  padding: 1.15rem 1.4rem;
+}
+
+.hm-accordion .accordion-button:not(.collapsed) {
+  color: var(--hm-accent-dark);
+  background: var(--hm-celeste-soft);
+  box-shadow: none;
+}
+
+.hm-accordion .accordion-button:focus {
+  box-shadow: none;
+  border-color: var(--hm-accent);
+}
+
+.hm-accordion .accordion-body {
+  color: var(--hm-muted);
+  line-height: 1.6;
+  background: var(--hm-card);
+  padding: 1.1rem 1.4rem 1.4rem;
+}
+
+/* Tarjetas del equipo en Nosotros */
+.hm-team-card {
+  border: 1px solid var(--hm-border);
+  border-radius: var(--hm-radius);
+  background: var(--hm-card);
+  box-shadow: var(--hm-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hm-team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(61, 58, 69, 0.12);
+}
+
+.hm-avatar-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--hm-celeste-soft), var(--hm-durazno-soft));
+  color: var(--hm-accent-dark);
+  border: 2px solid var(--hm-border);
+}
+
+/* Badge de cabecera con alto contraste garantizado para modo claro y oscuro */
+.hm-pill-badge {
+  display: inline-block;
+  padding: 0.42rem 1.15rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 999px;
+  background-color: #e0f2fe !important;
+  color: #0369a1 !important;
+  --bs-badge-color: #0369a1 !important;
+  border: 1px solid #bae6fd !important;
+}
+
+[data-theme='dark'] .hm-pill-badge {
+  background-color: #1e293b !important;
+  color: #38bdf8 !important;
+  --bs-badge-color: #38bdf8 !important;
+  border-color: #334155 !important;
 }

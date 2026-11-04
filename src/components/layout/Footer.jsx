@@ -23,12 +23,12 @@ function Footer() {
             <h3 className="h5 fw-bold mb-3">Contactanos</h3>
             <ul className="list-unstyled mb-0 hm-footer__links">
               <li>
-                <a href="https://wa.me/5491122334455" target="_blank" rel="noreferrer">
-                  WhatsApp: +54 9 11 2233-4455
+                <a href="https://wa.me/5491158056091" target="_blank" rel="noreferrer">
+                  WhatsApp: +54 9 11 5805 6091
                 </a>
               </li>
               <li>
-                <a href="tel:+5491144556677">Celular: +54 9 11 4455-6677</a>
+                <a href="tel:+5491158056091">Celular: +54 9 11 5805 6091</a>
               </li>
               <li>
                 <a href="mailto:hola@holamundo.tienda">Mail: hola@holamundo.tienda</a>

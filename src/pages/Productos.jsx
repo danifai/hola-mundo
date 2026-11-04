@@ -350,7 +350,7 @@ function Productos({ onAgregarAlCarrito }) {
           onClose={() => setToastMensaje(null)}
           delay={2500}
           autohide
-          className="rounded-pill shadow border-0"
+          className="rounded-pill shadow border-0 hm-toast-slide-up"
         >
           <Toast.Body className="d-flex align-items-center gap-2 px-4 py-2">
             <i className="bi bi-check-circle-fill text-success fs-5" aria-hidden="true" />

@@ -8,10 +8,13 @@ import {
   Form,
   InputGroup,
   Modal,
+  ProgressBar,
   Row,
+  Spinner,
 } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import CarritoItem from '../components/common/CarritoItem'
+import FormularioCompra from '../components/common/FormularioCompra'
 import ProductoCard from '../components/common/ProductoCard'
 import { cuponesValidos } from '../data/cupones'
 import { productos } from '../data/productos'
@@ -22,6 +25,12 @@ const formatearPrecio = (precio) =>
     currency: 'ARS',
     maximumFractionDigits: 0,
   }).format(precio)
+
+const labelsMetodoEntrega = {
+  domicilio: 'Envío a domicilio sin cargo',
+  sucursal: 'Retiro en sucursal Hola Mundo',
+  express: 'Envío express en el día',
+}
 
 function Carrito({
   carrito,
@@ -37,16 +46,20 @@ function Carrito({
   const [cuponAplicado, setCuponAplicado] = useState(null)
   const [errorCupon, setErrorCupon] = useState('')
 
-  // Estados del modal de confirmación de compra simulada
+  // Estados del modal y formulario controlado de compra
   const [showModal, setShowModal] = useState(false)
+  const [procesandoCompra, setProcesandoCompra] = useState(false)
   const [compraConfirmada, setCompraConfirmada] = useState(false)
   const [numeroOrden, setNumeroOrden] = useState('')
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
+    telefono: '',
     direccion: '',
-    metodoPago: 'tarjeta',
+    metodoEntrega: 'domicilio',
+    mensaje: '',
   })
+  const [errores, setErrores] = useState({})
 
   // Cálculos de totales
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0)
@@ -93,22 +106,101 @@ function Carrito({
     return [...productos].sort(() => Math.random() - 0.5).slice(0, 4)
   })
 
-  // Manejo de confirmación de compra
+  // Control de apertura del modal
   const handleIniciarCompra = () => {
     if (carrito.length === 0) return
     setCompraConfirmada(false)
+    setProcesandoCompra(false)
+    setErrores({})
     setShowModal(true)
   }
 
+  // Manejo de cambios en el formulario controlado
+  const handleFormChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+
+    // Limpia el error del campo a medida que el usuario escribe
+    if (errores[name]) {
+      setErrores((prev) => {
+        const copia = { ...prev }
+        delete copia[name]
+        return copia
+      })
+    }
+  }
+
+  // Validación con React de todos los campos obligatorios y formatos
+  const validarFormulario = () => {
+    const nuevosErrores = {}
+
+    // Nombre obligatorio (mínimo 3 caracteres)
+    if (!formData.nombre.trim()) {
+      nuevosErrores.nombre = 'El nombre y apellido es obligatorio.'
+    } else if (formData.nombre.trim().length < 3) {
+      nuevosErrores.nombre = 'Ingresá al menos 3 caracteres.'
+    }
+
+    // Email obligatorio y con formato válido
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!formData.email.trim()) {
+      nuevosErrores.email = 'El correo electrónico es obligatorio.'
+    } else if (!regexEmail.test(formData.email.trim())) {
+      nuevosErrores.email = 'Ingresá un correo electrónico válido (ej: nombre@correo.com).'
+    }
+
+    // Teléfono obligatorio (mínimo 8 dígitos)
+    const regexTelefono = /^[0-9+() -]{8,20}$/
+    if (!formData.telefono.trim()) {
+      nuevosErrores.telefono = 'El teléfono de contacto es obligatorio.'
+    } else if (!regexTelefono.test(formData.telefono.trim())) {
+      nuevosErrores.telefono = 'Ingresá un teléfono válido (al menos 8 números).'
+    }
+
+    // Dirección o localidad obligatoria
+    if (!formData.direccion.trim()) {
+      nuevosErrores.direccion = 'La dirección o localidad de entrega es obligatoria.'
+    } else if (formData.direccion.trim().length < 4) {
+      nuevosErrores.direccion = 'Por favor ingresá una dirección más específica.'
+    }
+
+    // Método de entrega obligatorio
+    if (!formData.metodoEntrega) {
+      nuevosErrores.metodoEntrega = 'Por favor seleccioná un método de entrega.'
+    }
+
+    // Validar que el carrito no esté vacío
+    if (carrito.length === 0) {
+      nuevosErrores.carrito = 'El carrito está vacío, no se puede confirmar la compra.'
+    }
+
+    return nuevosErrores
+  }
+
+  // Enviar formulario (onSubmit)
   const handleConfirmarPedido = (e) => {
     e.preventDefault()
-    const ordenGenerada = `#HM-${Math.floor(10000 + Math.random() * 90000)}`
-    setNumeroOrden(ordenGenerada)
-    setCompraConfirmada(true)
+
+    const erroresDetectados = validarFormulario()
+    if (Object.keys(erroresDetectados).length > 0) {
+      setErrores(erroresDetectados)
+      return
+    }
+
+    // Iniciar simulación de transacción con estado de procesamiento de 2 segundos
+    setProcesandoCompra(true)
+    setTimeout(() => {
+      const ordenGenerada = `#HM-${Math.floor(10000 + Math.random() * 90000)}`
+      setNumeroOrden(ordenGenerada)
+      setProcesandoCompra(false)
+      setCompraConfirmada(true)
+    }, 2000)
   }
 
   const handleFinalizarYLimpiar = () => {
     setShowModal(false)
+    setCompraConfirmada(false)
+    setProcesandoCompra(false)
     onVaciarCarrito?.()
     navigate('/')
   }
@@ -324,119 +416,71 @@ function Carrito({
         </Row>
       </Container>
 
-      {/* Modal de Confirmación de Compra Simulada */}
+      {/* Modal de Confirmación de Compra con Formulario Controlado */}
       <Modal
         show={showModal}
-        onHide={() => setShowModal(false)}
+        onHide={() => {
+          if (!procesandoCompra) setShowModal(false)
+        }}
         centered
         backdrop="static"
+        keyboard={!procesandoCompra}
         className="hm-modal-checkout"
       >
-        {!compraConfirmada ? (
+        {procesandoCompra ? (
+          /* Vista de Procesamiento / Transacción Simulada (2 segundos) */
+          <div className="p-4 p-md-5 text-center hm-fade-in">
+            <div className="mb-4 d-flex justify-content-center">
+              <Spinner
+                animation="border"
+                role="status"
+                className="hm-modal-processing-spinner"
+              />
+            </div>
+            <h4 className="fw-bold mb-2">Procesando tu compra...</h4>
+            <p className="text-muted small mb-4 mx-auto" style={{ maxWidth: '340px' }}>
+              Estamos validando tus datos y reservando los productos seleccionados en nuestro depósito.
+            </p>
+            <ProgressBar
+              animated
+              now={100}
+              className="rounded-pill mx-auto mb-3"
+              style={{ height: '8px', maxWidth: '280px' }}
+            />
+            <span className="small text-muted fst-italic">
+              Por favor aguardá unos instantes...
+            </span>
+          </div>
+        ) : !compraConfirmada ? (
           <>
             <Modal.Header closeButton className="border-bottom">
               <Modal.Title className="fw-bold fs-5">
-                Confirmar compra simulada
+                Datos de entrega y confirmación
               </Modal.Title>
             </Modal.Header>
-            <Form onSubmit={handleConfirmarPedido}>
-              <Modal.Body className="p-4">
-                <p className="text-muted small mb-3">
-                  Completá los datos para simular tu orden de compra en Hola Mundo.
-                </p>
-
-                <Form.Group className="mb-3">
-                  <Form.Label className="small fw-bold">Nombre y Apellido *</Form.Label>
-                  <Form.Control
-                    type="text"
-                    required
-                    placeholder="Ej: Laura Gómez"
-                    value={formData.nombre}
-                    onChange={(e) =>
-                      setFormData({ ...formData, nombre: e.target.value })
-                    }
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label className="small fw-bold">Email de contacto *</Form.Label>
-                  <Form.Control
-                    type="email"
-                    required
-                    placeholder="tucorreo@ejemplo.com"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label className="small fw-bold">Dirección de entrega *</Form.Label>
-                  <Form.Control
-                    type="text"
-                    required
-                    placeholder="Calle, número, localidad"
-                    value={formData.direccion}
-                    onChange={(e) =>
-                      setFormData({ ...formData, direccion: e.target.value })
-                    }
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label className="small fw-bold">Método de pago simulado</Form.Label>
-                  <Form.Select
-                    value={formData.metodoPago}
-                    onChange={(e) =>
-                      setFormData({ ...formData, metodoPago: e.target.value })
-                    }
-                  >
-                    <option value="tarjeta">Tarjeta de crédito / débito (6 cuotas sin interés)</option>
-                    <option value="transferencia">Transferencia bancaria</option>
-                    <option value="mercadopago">Mercado Pago</option>
-                  </Form.Select>
-                </Form.Group>
-
-                {/* Resumen dentro del modal */}
-                <div className="bg-light p-3 rounded-3 mt-3 border">
-                  <div className="d-flex justify-content-between small text-muted mb-1">
-                    <span>Productos a abonar:</span>
-                    <span>{cantidadTotal} unidades</span>
-                  </div>
-                  {cuponAplicado && (
-                    <div className="d-flex justify-content-between small text-success mb-1">
-                      <span>Cupón ({cuponAplicado.codigo}):</span>
-                      <span>-{formatearPrecio(montoDescuento)}</span>
-                    </div>
-                  )}
-                  <div className="d-flex justify-content-between fw-bold fs-6">
-                    <span>Total final:</span>
-                    <span style={{ color: 'var(--hm-accent-dark)' }}>
-                      {formatearPrecio(totalFinal)}
-                    </span>
-                  </div>
-                </div>
-              </Modal.Body>
-              <Modal.Footer className="border-top">
-                <Button variant="secondary" onClick={() => setShowModal(false)}>
-                  Cancelar
-                </Button>
-                <Button type="submit" className="btn-hm fw-bold">
-                  Confirmar pedido
-                </Button>
-              </Modal.Footer>
-            </Form>
+            <FormularioCompra
+              formData={formData}
+              onChange={handleFormChange}
+              errores={errores}
+              onSubmit={handleConfirmarPedido}
+              onCancel={() => setShowModal(false)}
+              totalFinal={totalFinal}
+              cantidadTotal={cantidadTotal}
+              cuponAplicado={cuponAplicado}
+              montoDescuento={montoDescuento}
+            />
           </>
         ) : (
           /* Vista de Confirmación Exitosa */
-          <div className="p-4 p-md-5 text-center">
-            <div className="display-3 text-success mb-3">
-              <i className="bi bi-check-circle-fill" />
+          <div className="p-4 p-md-5 text-center hm-fade-in">
+            <div className="mb-3">
+              <div className="hm-modal-success-check">
+                <i className="bi bi-check2" />
+              </div>
             </div>
             <h3 className="fw-bold mb-2">¡Felicitaciones, {formData.nombre}!</h3>
             <p className="text-muted mb-3">
-              Tu compra simulada fue procesada con éxito.
+              Tu compra simulada fue procesada exitosamente.
             </p>
             <div className="bg-light p-3 rounded-4 mb-4 border d-inline-block px-4">
               <span className="small text-muted d-block">Número de orden</span>
@@ -444,11 +488,35 @@ function Carrito({
                 {numeroOrden}
               </strong>
             </div>
-            <p className="text-muted small mb-4 mx-auto" style={{ maxWidth: '380px' }}>
-              Enviamos la confirmación a <strong>{formData.email}</strong> y despacharemos
-              tu pedido a <strong>{formData.direccion}</strong> con envío sin cargo.
-            </p>
-            <Button className="btn-hm px-4 py-2" onClick={handleFinalizarYLimpiar}>
+
+            {/* Detalle confirmado del pedido */}
+            <div className="bg-light p-3 rounded-3 text-start small mb-4 border mx-auto" style={{ maxWidth: '420px' }}>
+              <div className="mb-1">
+                <strong>Email:</strong> {formData.email}
+              </div>
+              <div className="mb-1">
+                <strong>Teléfono:</strong> {formData.telefono}
+              </div>
+              <div className="mb-1">
+                <strong>Dirección:</strong> {formData.direccion}
+              </div>
+              <div className="mb-1">
+                <strong>Método de entrega:</strong> {labelsMetodoEntrega[formData.metodoEntrega]}
+              </div>
+              {formData.mensaje && (
+                <div className="mb-1 text-muted">
+                  <strong>Aclaración:</strong> "{formData.mensaje}"
+                </div>
+              )}
+              <div className="pt-2 mt-2 border-top fw-bold d-flex justify-content-between">
+                <span>Total abonado:</span>
+                <span className="text-primary" style={{ color: 'var(--hm-accent-dark)' }}>
+                  {formatearPrecio(totalFinal)}
+                </span>
+              </div>
+            </div>
+
+            <Button className="btn-hm px-4 py-2 fw-bold" onClick={handleFinalizarYLimpiar}>
               Volver a la tienda
             </Button>
           </div>

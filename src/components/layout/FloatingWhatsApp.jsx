@@ -4,7 +4,7 @@ function FloatingWhatsApp() {
   return (
     <a
       className="hm-whatsapp"
-      href="https://wa.me/5491122334455"
+      href="https://wa.me/5491158056091"
       target="_blank"
       rel="noreferrer"
       aria-label="Contactar por WhatsApp"
