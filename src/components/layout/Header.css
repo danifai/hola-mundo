@@ -4,13 +4,31 @@
   background: color-mix(in srgb, var(--hm-surface) 94%, transparent) !important;
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--hm-border);
-  overflow: visible;
 }
 
 .hm-header .container-xl,
-.hm-header .navbar-collapse,
 .hm-header__bar {
   overflow: visible;
+}
+
+/* En desktop permitimos overflow para los dropdowns de categorías */
+@media (min-width: 1200px) {
+  .hm-header.navbar,
+  .hm-header .navbar-collapse {
+    overflow: visible;
+  }
+}
+
+/* Durante la animación de colapso (abrir o cerrar),
+   forzamos overflow: hidden para que los textos no se desborden sin fondo */
+.hm-header .collapsing,
+.hm-header .navbar-collapse.collapsing {
+  overflow: hidden !important;
+  transition: height 0.32s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.hm-header .collapsing * {
+  pointer-events: none;
 }
 
 /* Logo sin círculo: se recorta el margen blanco del archivo con zoom */
@@ -248,5 +266,13 @@
 
   .hm-header.navbar .hm-header__collapse .hm-header__actions {
     display: none !important;
+  }
+
+  .hm-header__collapse {
+    width: 100%;
+  }
+
+  .hm-header__collapse.show {
+    padding-bottom: 0.75rem;
   }
 }

@@ -1,6 +1,6 @@
-# Hola Mundo 🚀👶
+# Hola Mundo 
 > **Tienda Online de Artículos para Bebés**  
-> Trabajo Práctico Integrador para la materia **Construcción de Interfaces de Usuario**  
+> Trabajo Práctico 1 para la materia **Construcción de Interfaces de Usuario**  
 > **Universidad Nacional de Hurlingham (UNAHUR)**
 
 [![Deploy Status](https://img.shields.io/badge/Deploy-GitHub%20Pages-24292e?style=flat-square&logo=github)](https://danifai.github.io/hola-mundo/)
@@ -10,20 +10,20 @@
 
 ---
 
-## 📌 Deploy en Producción
-Podés acceder a la aplicación en vivo a través del siguiente enlace:  
-👉 **[https://danifai.github.io/hola-mundo/](https://danifai.github.io/hola-mundo/)**
+## Deploy en Producción
+Se puede acceder a la aplicación en vivo a través del siguiente enlace:  
+**[https://danifai.github.io/hola-mundo/](https://danifai.github.io/hola-mundo/)**
 
 ---
 
-## 📖 Descripción Breve
+## Descripción Breve
 **Hola Mundo** es una Single Page Application (SPA) de comercio electrónico especializada en productos de puericultura y primera infancia (sillas, carritos, mecedoras, cunas, butacas, bolsos, alimentación y baño).
 
 El proyecto fue concebido y desarrollado bajo estrictas pautas de accesibilidad, diseño responsivo y rendimiento ágil. Su estética combina tonos pastel cálidos (celeste, durazno y arena) con una metáfora tierna y espacial inspirada en el primer "Hola Mundo" que pronuncia un programador al iniciar su viaje, y en el primer saludo que un recién nacido le regala a su familia.
 
 ---
 
-## 👥 Integrantes del Grupo
+## Integrantes del Grupo
 Proyecto desarrollado por estudiantes de la **Universidad Nacional de Hurlingham (UNAHUR)**:
 
 - **Daniel Faigenboim**
@@ -32,8 +32,7 @@ Proyecto desarrollado por estudiantes de la **Universidad Nacional de Hurlingham
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
-El proyecto cumple estrictamente con las directrices técnicas y restricciones de la cátedra:
+## Tecnologías Utilizadas
 
 - **React 19:** Biblioteca base para la construcción de interfaces de usuario.
   - Uso exclusivo de componentes funcionales.
@@ -47,14 +46,14 @@ El proyecto cumple estrictamente con las directrices técnicas y restricciones d
 
 ---
 
-## ✨ Características Principales
+## Características Principales
 1. **Catálogo Completo y Filtros:** 18 productos categorizados, búsqueda reactiva por texto, selector de categoría, switches de stock y ofertas, y ordenamiento por precio o novedad.
 2. **Vista de Detalle de Producto:** Control de cantidades limitado al stock real disponible, badges de estado, descripción detallada y carrusel de productos relacionados.
 3. **Carrito y Checkout Modular:**
    - Resumen rápido lateral (MiniCarrito `Offcanvas`) accesible desde el Header.
-   - Vista principal de carrito de 2 columnas estilo Bugaboo con desglose de subtotales y envío gratis.
+   - Vista principal de carrito de 2 columnas con desglose de subtotales y envío gratis.
    - Sistema de cupones de descuento activos (`1010`, `1515`, `2020`).
-   - Sugerencias de productos aleatorios para complementar la compra.
+   - Sugerencias de productos para complementar la compra.
    - Formulario de checkout controlado con validaciones en tiempo real para todos sus campos obligatorios.
    - **Simulación de transacción:** Animación de 2 segundos con spinner pastel y barra de progreso antes de confirmar la compra y emitir el ticket final con número de orden `#HM-XXXXX`.
 4. **Header y Navegación Adaptativa:**
@@ -67,12 +66,12 @@ El proyecto cumple estrictamente con las directrices técnicas y restricciones d
    - Modal interactivo de **Cuotas sin interés** (Visa hasta 6 cuotas y Mastercard hasta 12 cuotas).
 6. **Vistas Institucionales:**
    - **Nosotros:** Presentación del equipo de estudiantes de la UNAHUR, misión y valores de la marca.
-   - **Preguntas Frecuentes:** Acordeón con las 6 consultas clave sobre envíos, medios de pago, garantías y normas de seguridad infantil.
+   - **Preguntas Frecuentes:** Acordeón con consultas clave más generales.
 7. **Botón Flotante de WhatsApp:** Conexión directa y fija en toda la navegación.
 
 ---
 
-## 🚀 Instrucciones para Instalar y Correr el Proyecto
+## Instrucciones para Instalar y Correr el Proyecto
 
 ### 1. Prerrequisitos
 - **Node.js:** Versión 20 o superior recomendada (el proyecto incluye archivo `.nvmrc`).
@@ -121,5 +120,5 @@ npm run deploy
 
 ---
 
-## 📄 Licencia y Marco Académico
+## Licencia y Marco Académico
 Proyecto desarrollado con fines estrictamente académicos para la **Universidad Nacional de Hurlingham (UNAHUR)**.
