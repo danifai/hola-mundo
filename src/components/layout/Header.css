@@ -138,9 +138,15 @@
   border-color: var(--hm-border);
   box-shadow: var(--hm-shadow);
   min-width: 240px;
+  max-width: min(320px, calc(100vw - 2rem));
   max-height: min(70vh, 420px);
   overflow-y: auto;
   z-index: 1055;
+}
+
+.hm-header__dropdown .dropdown-item {
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .hm-header__search .form-control {

@@ -16,19 +16,35 @@ import './Header.css'
 
 const categorias = [...new Set(productos.map((p) => p.categoria))]
 
-function CategoriaDropdown({ categoria, items }) {
+function CategoriaDropdown({ categoria, items, esUltima }) {
   const [show, setShow] = useState(false)
+  const timeoutRef = useRef(null)
   const esDesktop = () => window.matchMedia('(min-width: 992px)').matches
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current)
+  }, [])
 
   return (
     <NavDropdown
       title={categoria}
       id={`cat-${categoria}`}
       className="hm-header__dropdown"
+      align={esUltima ? 'end' : undefined}
       show={show}
       onToggle={(next) => setShow(next)}
-      onMouseEnter={() => esDesktop() && setShow(true)}
-      onMouseLeave={() => esDesktop() && setShow(false)}
+      onMouseEnter={() => {
+        if (!esDesktop()) return
+        
+        clearTimeout(timeoutRef.current)
+        setShow(true)
+      }}
+      onMouseLeave={() => {
+        if (!esDesktop()) return
+        timeoutRef.current = setTimeout(() => {
+          setShow(false)
+        }, 15)
+      }}
     >
       <NavDropdown.Item
         as={Link}
@@ -184,11 +200,12 @@ function Header({
 
           {/* Fila 2: categorías */}
           <Nav className="hm-header__cats">
-            {categorias.map((categoria) => (
+            {categorias.map((categoria, index) => (
               <CategoriaDropdown
                 key={categoria}
                 categoria={categoria}
                 items={productos.filter((p) => p.categoria === categoria)}
+                esUltima={index === categorias.length - 1}
               />
             ))}
           </Nav>
