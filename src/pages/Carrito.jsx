@@ -119,7 +119,7 @@ function Carrito({
         <div className="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
           <div>
             <h1 className="fw-bold mb-1">Carrito de compras</h1>
-            <p className="text-muted small">
+            <p className="hm-text-muted small">
               {cantidadTotal === 0
                 ? 'Tu carrito actualmente no tiene productos'
                 : `Tenés ${cantidadTotal} ${cantidadTotal === 1 ? 'producto' : 'productos'} en tu lista`}
@@ -146,7 +146,7 @@ function Carrito({
                 <div className="display-3 text-muted mb-3 opacity-50">
                   <i className="bi bi-bag-x" />
                 </div>
-                <h3 className="fw-bold mb-2">Tu carrito está vacío</h3>
+                <h3 className="text-dark fw-bold mb-2">Tu carrito está vacío</h3>
                 <p className="text-muted mx-auto mb-4" style={{ maxWidth: '420px' }}>
                   Parece que todavía no agregaste nada. Explorá nuestro catálogo para
                   encontrar los mejores artículos para tu bebé.
@@ -175,7 +175,7 @@ function Carrito({
             <section className="mt-4 pt-3 border-top">
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <h4 className="fw-bold mb-0">Te puede interesar para acompañar</h4>
-                <span className="text-muted small">Sugerencias aleatorias</span>
+                <span className="hm-text-muted small">Sugerencias aleatorias</span>
               </div>
               <Row className="g-3">
                 {sugerencias.map((prod) => (
@@ -434,7 +434,7 @@ function Carrito({
             <div className="display-3 text-success mb-3">
               <i className="bi bi-check-circle-fill" />
             </div>
-            <h3 className="fw-bold mb-2">¡Felicitaciones, {formData.nombre}!</h3>
+            <h3 className="text-dark fw-bold mb-2">¡Felicitaciones, {formData.nombre}!</h3>
             <p className="text-muted mb-3">
               Tu compra simulada fue procesada con éxito.
             </p>

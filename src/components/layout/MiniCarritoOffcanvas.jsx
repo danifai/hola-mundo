@@ -52,7 +52,7 @@ function MiniCarritoOffcanvas({ show, onHide, carrito, onModificarCantidad, onEl
             <div className="display-4 text-muted mb-3 opacity-50">
               <i className="bi bi-cart-x" />
             </div>
-            <h5 className="fw-bold mb-2">Tu carrito está vacío</h5>
+            <h5 className="text-dark fw-bold mb-2">Tu carrito está vacío</h5>
             <p className="text-muted small mb-4">
               ¡Aún no agregaste productos! Descubrí nuestras novedades y ofertas.
             </p>

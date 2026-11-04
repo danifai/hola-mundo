@@ -135,7 +135,9 @@ function DetalleProducto({ onAgregarAlCarrito }) {
           >
             {producto.categoria}
           </Breadcrumb.Item>
-          <Breadcrumb.Item active>{producto.nombre}</Breadcrumb.Item>
+          <Breadcrumb.Item active className="hm-text-muted">
+            {producto.nombre}
+          </Breadcrumb.Item>
         </Breadcrumb>
 
         {/* Detalle Principal del Producto */}
@@ -195,7 +197,7 @@ function DetalleProducto({ onAgregarAlCarrito }) {
                   </div>
 
                   {/* Nombre del producto */}
-                  <h1 className="fw-bold mb-0" style={{ fontSize: 'clamp(1.75rem, 2.5vw, 2.25rem)' }}>
+                  <h1 className="text-dark fw-bold mb-0" style={{ fontSize: 'clamp(1.75rem, 2.5vw, 2.25rem)' }}>
                     {producto.nombre}
                   </h1>
 
@@ -214,7 +216,7 @@ function DetalleProducto({ onAgregarAlCarrito }) {
 
                   {/* Descripción completa */}
                   <div>
-                    <h5 className="fw-bold mb-2">Descripción</h5>
+                    <h5 className="text-dark fw-bold mb-2">Descripción</h5>
                     <p className="text-muted lh-base" style={{ fontSize: '1.02rem' }}>
                       {producto.descripcion}
                     </p>
@@ -222,7 +224,7 @@ function DetalleProducto({ onAgregarAlCarrito }) {
 
                   {/* Características principales */}
                   <div className="p-3 rounded-3 bg-body-tertiary">
-                    <h6 className="fw-bold mb-2">Características principales:</h6>
+                    <h6 className="text-dark fw-bold mb-2">Características principales:</h6>
                     <ul className="list-unstyled mb-0 d-flex flex-column gap-2 small text-muted">
                       <li className="d-flex align-items-center gap-2">
                         <i className="bi bi-shield-check text-success fs-6" />
@@ -344,7 +346,7 @@ function DetalleProducto({ onAgregarAlCarrito }) {
         >
           <Toast.Body className="d-flex align-items-center gap-2 px-4 py-2">
             <i className="bi bi-check-circle-fill text-success fs-5" aria-hidden="true" />
-            <span className="fw-semibold">{toastMensaje}</span>
+            <span className="text-dark fw-semibold">{toastMensaje}</span>
           </Toast.Body>
         </Toast>
       </ToastContainer>
